@@ -35,6 +35,13 @@ export async function getContactById(contactId) {
     return contact || null;
 }
 
+export async function getContactByName(name) {
+    const contacts = await listContacts();
+    const contact = contacts.find(contact => contact.name.toLowerCase() == name.toLowerCase());
+
+    return contact || null;
+}
+
 
 /**
  * Removing contact by ID
