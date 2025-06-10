@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const filePath = path.join(process.cwd(), "data", "contacts.json");
+const filePath = path.join(process.cwd(), "db", "contacts.json");
 
 export default async function handler(req, res) {
     const method = req.method;
