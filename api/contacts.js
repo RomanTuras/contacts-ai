@@ -1,5 +1,7 @@
 import fs from "fs";
 import path from "path";
+import * as contactsService from "../services/contactsServices.js";
+
 
 const filePath = path.join(process.cwd(), "db", "contacts.json");
 
@@ -8,7 +10,15 @@ export default async function handler(req, res) {
     let contacts = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
     if (method === "GET") {
-        return res.status(200).json(contacts);
+        const { name } = req.query;
+        const result = await contactsService.getContactByName(name);
+
+        if (!result) {
+            return res.status(404).json({ message: "Contact not found" });
+        }
+
+        return res.status(200).json(result);
+        // return res.status(200).json(contacts);
     }
 
     if (method === "POST") {
