@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const { name } = req.query;
 
     if (req.method === "GET") {
-        const result = await contactsService.getContactByName();
+        const result = await contactsService.getContactByName(name);
 
         if (!result) {
             res.status(404).json({ message: "Contact not found" });
